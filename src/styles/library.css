@@ -1,0 +1,147 @@
+.library-section {
+  margin-bottom: 2rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.playlist-vertical-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.playlist-card {
+  background: #232323;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.playlist-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.playlist-meta {
+  margin: 0.25rem 0 0;
+  opacity: 0.75;
+  font-size: 0.9rem;
+}
+
+.playlist-song-list {
+  margin-top: 1rem;
+}
+
+.playlist-song {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid #1f1f1f;
+}
+
+.playlist-song:first-of-type {
+  border-top: none;
+}
+
+.playlist-song-title {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.playlist-song-artist {
+  opacity: 0.75;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.playlist-action-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.playlist-action-btn {
+  background: #1db954;
+  color: black;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.small-btn {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+}
+
+.add-to-playlist-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #1a1a1a;
+  border-radius: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.song-search-list {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.song-search-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid #333;
+}
+
+.song-search-item:first-child {
+  border-top: none;
+}
+
+.song-search-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.song-search-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.song-search-title {
+  font-weight: 700;
+  margin: 0;
+}
+
+.song-search-artist {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-top: 0.2rem;
+}

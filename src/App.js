@@ -8,9 +8,11 @@ import MusicPlayer from "./components/MusicPlayer";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Library from "./pages/Library";
+import songs from "./data/songs";
 
 function App() {
   const [currentSong, setCurrentSong] = useState(null);
+  const [currentSongIndex, setCurrentSongIndex] = useState(null);
   const [search, setSearch] = useState("");
   const [playlists, setPlaylists] = useState(() => {
     const stored = localStorage.getItem("playlists");
@@ -36,6 +38,16 @@ function App() {
     return () => window.clearTimeout(timer);
   }, [toast]);
 
+  useEffect(() => {
+    if (!currentSong) {
+      setCurrentSongIndex(null);
+      return;
+    }
+
+    const index = songs.findIndex((song) => song.id === currentSong.id);
+    setCurrentSongIndex(index >= 0 ? index : null);
+  }, [currentSong]);
+
   const addPlaylist = (name) => {
     const playlistName = name?.trim();
     if (!playlistName) return;
@@ -48,7 +60,7 @@ function App() {
 
   const addSongToPlaylist = (song, playlistId) => {
     const targetPlaylist = playlists.find(
-      (playlist) => playlist.id === playlistId
+      (playlist) => playlist.id === playlistId,
     );
     if (!song || !targetPlaylist) return false;
 
@@ -62,8 +74,8 @@ function App() {
       prev.map((playlist) =>
         playlist.id !== playlistId
           ? playlist
-          : { ...playlist, songs: [...playlist.songs, song] }
-      )
+          : { ...playlist, songs: [...playlist.songs, song] },
+      ),
     );
 
     setToast(`Added "${song.title}" to "${targetPlaylist.name}".`);
@@ -78,14 +90,14 @@ function App() {
           : {
               ...playlist,
               songs: playlist.songs.filter((song) => song.id !== songId),
-            }
-      )
+            },
+      ),
     );
   };
 
   const removePlaylist = (playlistId) => {
     setPlaylists((prev) =>
-      prev.filter((playlist) => playlist.id !== playlistId)
+      prev.filter((playlist) => playlist.id !== playlistId),
     );
   };
 
@@ -94,6 +106,23 @@ function App() {
       const exists = prev.some((s) => s.id === song.id);
       return exists ? prev.filter((s) => s.id !== song.id) : [...prev, song];
     });
+  };
+
+  const handleSelectSong = (song) => {
+    if (!song) return;
+    setCurrentSong(song);
+  };
+
+  const handlePlayNext = () => {
+    if (currentSongIndex === null || currentSongIndex < 0) return;
+    const nextIndex = (currentSongIndex + 1) % songs.length;
+    setCurrentSong(songs[nextIndex]);
+  };
+
+  const handlePlayPrev = () => {
+    if (currentSongIndex === null || currentSongIndex < 0) return;
+    const prevIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+    setCurrentSong(songs[prevIndex]);
   };
 
   return (
@@ -112,7 +141,7 @@ function App() {
                 <Home
                   search={search}
                   setSearch={setSearch}
-                  setCurrentSong={setCurrentSong}
+                  setCurrentSong={handleSelectSong}
                 />
               }
             />
@@ -122,7 +151,7 @@ function App() {
                 <Search
                   search={search}
                   setSearch={setSearch}
-                  setCurrentSong={setCurrentSong}
+                  setCurrentSong={handleSelectSong}
                 />
               }
             />
@@ -134,8 +163,9 @@ function App() {
                   likedSongs={likedSongs}
                   removeSongFromPlaylist={removeSongFromPlaylist}
                   removePlaylist={removePlaylist}
-                  setCurrentSong={setCurrentSong}
+                  setCurrentSong={handleSelectSong}
                   addSongToPlaylist={addSongToPlaylist}
+                  createPlaylist={addPlaylist}
                 />
               }
             />
@@ -146,6 +176,8 @@ function App() {
           currentSong={currentSong}
           onLike={toggleLike}
           likedSongs={likedSongs}
+          onPrev={handlePlayPrev}
+          onNext={handlePlayNext}
         />
       </div>
     </BrowserRouter>

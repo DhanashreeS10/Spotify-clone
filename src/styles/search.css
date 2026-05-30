@@ -1,0 +1,46 @@
+.search-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #282828;
+  border-radius: 2rem;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+  border: 1px solid #404040;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 0.95rem;
+}
+
+.search-icon {
+  color: #b3b3b3;
+}
+
+.playlist-select-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.playlist-select {
+  min-width: 180px;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #333;
+  background: #121212;
+  color: #fff;
+}
+
+.note-text {
+  opacity: 0.75;
+  margin-bottom: 1rem;
+}
